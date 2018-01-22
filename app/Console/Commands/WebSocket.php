@@ -52,7 +52,7 @@ class WebSocket extends Command
         ]);
 
         // 建立连接时回调函数
-        $this->server->on('open', function (\swoole_websocket_server $server, \swoole_http_request $request){
+        $this->server->on('open', function ( $server,  $request){
 
             echo "server: handshake success with fd{$request->fd}\n";
             echo '连接了';
