@@ -18,3 +18,6 @@ Route::get('/', function () {
 Route::get('msgbox', function (){
     return view('msgbox');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
