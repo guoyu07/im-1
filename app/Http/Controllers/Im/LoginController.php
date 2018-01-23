@@ -3,15 +3,21 @@
 namespace App\Http\Controllers\Im;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Requests\LoginPost;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    use AuthenticatesUsers;
-    protected $redirectTo = '/home';
-    public function __construct()
+    /**
+     *
+     */
+    public function login()
     {
-        $this->middleware('guest')->except('logout');
+        return view('im.login.login');
+    }
+
+    public function doLogin(LoginPost $request)
+    {
+
     }
 }
