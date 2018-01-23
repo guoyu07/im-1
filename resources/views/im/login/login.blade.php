@@ -1,1 +1,1 @@
-login
+{{ csrf_field() }}
