@@ -52,27 +52,36 @@ class WebSocket extends Command
         ]);
 
         // 建立连接时回调函数
-        $this->server->on('open', function ( $server,  $request){
-
-            echo "server: handshake success with fd{$request->fd}\n";
-            echo '连接了';
-        });
+        $this->server->on('open', [$this, 'onOpen']);
 
         // 收到数据时回调函数
-        $this->server->on('message', function (\swoole_websocket_server $server, \swoole_websocket_frame $frame){
-            echo "receive from {$frame->fd}:{$frame->data},opcode:{$frame->opcode},fin:{$frame->finish}\n";
-            foreach ($server->connection_list() as $fd) {
-                if ($fd == $frame->fd) continue;
-                $server->push($fd, $frame->data);
-            }
-
-        });
+        $this->server->on('message', [$this, 'onMessage']);
 
         // 连接关闭时回调函数
-        $this->server->on('close', function ($server, $fd){
-            echo "client {$fd} closed\n";
-        });
+        $this->server->on('close', [$this, 'onClose']);
 
         $this->server->start();
+    }
+
+    public function onOpen( $server,  $request)
+    {
+        echo "server: handshake success with fd{$request->fd}\n";
+        echo '连接了';
+    }
+
+    public function onMessage(\swoole_websocket_server $server, \swoole_websocket_frame $frame)
+    {
+        echo "receive from {$frame->fd}:{$frame->data},opcode:{$frame->opcode},fin:{$frame->finish}\n";
+        foreach ($server->connection_list() as $fd) {
+            if ($fd == $frame->fd) continue;
+            $server->push($fd, $frame->data);
+        }
+
+    }
+
+
+    public function onClose($server, $fd)
+    {
+        echo "client {$fd} closed\n";
     }
 }
