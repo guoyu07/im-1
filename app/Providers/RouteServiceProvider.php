@@ -55,7 +55,7 @@ class RouteServiceProvider extends ServiceProvider
             ['namespace' => $this->namespace, 'middleware' => 'web', 'as' => 'web.'],
             function () {
 //                Route::group(['as'=> 'pc.','namespace' => 'Pc', 'domain' => 'im.com'], src_path('routes/web.php'));
-                Route::group(['as'=>'im.', 'namespace' => 'Im', 'domain' => 'im.im.com'], base_path('routes/im.php'));
+                Route::group(['as'=>'im.', 'namespace' => 'Im', 'domain' => 'im.'.env('APP_DOMAIN')], base_path('routes/im.php'));
             }
         );
 
