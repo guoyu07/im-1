@@ -31,7 +31,7 @@ class Controller extends BaseController
      */
     public function successRedirect($mas='成功！', $redirect_url='')
     {
-        if($redirect_url) return redirect()->withErrors(['success_msg' => $mas]);
+        if($redirect_url) return redirect($redirect_url)->withErrors(['success_msg' => $mas]);
         return redirect()->back()->withErrors(['success_msg' => $mas]);
     }
 }

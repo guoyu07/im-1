@@ -66,7 +66,6 @@ class WebSocket extends Command
     public function onOpen( $server,  $request)
     {
         echo "server: handshake success with fd{$request->fd}\n";
-        echo '连接了';
     }
 
     public function onMessage(\swoole_websocket_server $server, \swoole_websocket_frame $frame)
