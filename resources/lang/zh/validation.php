@@ -7,6 +7,13 @@
  */
 
 return [
-    'email'                => '邮箱格式不正确！',
-    'required'                => ':attribute 不能为空！',
+    'email'    => '邮箱格式不正确!',
+    'required' => ':attribute不能为空！',
+
+    'attributes' => [
+        'email'    => '邮箱地址',
+        'password' => '密码',
+    ],
+    'custom'     => [
+    ],
 ];
