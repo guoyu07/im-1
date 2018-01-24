@@ -28,8 +28,7 @@ class LoginController extends Controller
     {
         $user = $this->user->findByAttributes(['email' => $request->email]);
         if(!Hash::check($request->password, $user->password)){
-            return response()->json(['errors'=> '账号或密码错误！']);
-            return redirect()->back()->withErrors(['error' => '账号或密码错误！'])->withInput();
+            return $this->errorRedirect('账号或密码错误！');
         }
         session(['user'=> $user]);
     }
