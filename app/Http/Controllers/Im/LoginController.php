@@ -18,6 +18,7 @@ class LoginController extends Controller
 
     public function doLogin(LoginPost $request)
     {
+
         dd($request->name);
         dd(123);
     }

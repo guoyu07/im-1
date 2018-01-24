@@ -1,1 +1,2 @@
-{{ csrf_field() }}
+login
+{{ $errors->first('email') }}
