@@ -15,6 +15,6 @@ class FriendRepository extends BaseRepository
 {
     public function friends($u_id)
     {
-        return Friend::with(['friends'])->where('u_id', $u_id)->get();
+        return Friend::with(['friends','groups'])->where('u_id', $u_id)->get();
     }
 }

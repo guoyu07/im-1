@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Friend extends Model
+class FriendGroup extends Model
 {
-    public $timestamps = false;
 
     /**
-     * 获取好友
+     * 获取分组下的好友
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function users()
+    public function friends()
     {
-        return $this->hasMany(User::class, 'id', 'f_id');
+        return $this->hasMany(Friend::class,'friend_group_id','id');
     }
+
 }

@@ -20,4 +20,8 @@ class UserController extends Controller
         $user = $this->user->login();
         dd($user);
     }
+    public function friends(){
+        $data = $this->user->friends(userId());
+        dd($data->toArray());
+    }
 }

@@ -17,13 +17,19 @@ class LoginController extends Controller
     }
 
     /**
-     *
+     * 登录页
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function login()
     {
         return view('im.login.login');
     }
 
+    /**
+     * 登录
+     * @param LoginPost $request
+     * @return $this
+     */
     public function doLogin(LoginPost $request)
     {
         $user = $this->user->findByAttributes(['email' => $request->email]);

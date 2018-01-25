@@ -34,4 +34,9 @@ class User extends Authenticatable
         $this->attributes['password'] = Hash::make($password);
     }
 
+    public function friendGroups()
+    {
+        return $this->hasMany(FriendGroup::class);
+    }
+
 }

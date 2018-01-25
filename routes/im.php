@@ -14,5 +14,5 @@ Route::post('login','LoginController@doLogin');
 
 Route::group(['middleware' => ['auth.im']], function ($route) {
     $route->get('/','IndexController@index');
-    $route->get('friends','FriendController@lists');
+    $route->get('friends','UserController@friends');
 });
