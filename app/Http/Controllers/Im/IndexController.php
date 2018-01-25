@@ -11,4 +11,9 @@ class IndexController extends Controller
     {
         return view('im.index.index');
     }
+
+    public function friends()
+    {
+
+    }
 }

@@ -7,12 +7,12 @@
  */
 
 Route::get('login','LoginController@login');
+Route::get('register','RegisterController@showRegistrationForm');
+Route::post('register','RegisterController@register');
 Route::post('login','LoginController@doLogin');
-Route::get('index','IndexController@index');
 
 
-
-Route::get('/', function () {
-
-    return view('welcome');
+Route::group(['middleware' => ['auth.im']], function ($route) {
+    $route->get('/','IndexController@index');
+    $route->get('friends','FriendController@lists');
 });

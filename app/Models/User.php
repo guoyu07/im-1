@@ -33,4 +33,5 @@ class User extends Authenticatable
         if (empty(($password))) return false;
         $this->attributes['password'] = Hash::make($password);
     }
+
 }

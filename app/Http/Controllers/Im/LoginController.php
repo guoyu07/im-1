@@ -27,10 +27,10 @@ class LoginController extends Controller
     public function doLogin(LoginPost $request)
     {
         $user = $this->user->findByAttributes(['email' => $request->email]);
-        if(!Hash::check($request->password, $user['password'])){
+        if (!Hash::check($request->password, $user['password'])) {
             return $this->errorRedirect('账号或密码错误！');
         }
-        session(['user'=> $user]);
-        return $this->successRedirect('登录成功！', url('index'));
+        session(['user' => $user]);
+        return $this->successRedirect('登录成功！', url('/'));
     }
 }

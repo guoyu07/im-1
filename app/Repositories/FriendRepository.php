@@ -9,7 +9,12 @@
 namespace App\Repositories;
 
 
-class FriendRepository
-{
+use App\Models\Friend;
 
+class FriendRepository extends BaseRepository
+{
+    public function friends($u_id)
+    {
+        return Friend::with(['friends'])->where('u_id', $u_id)->get();
+    }
 }
