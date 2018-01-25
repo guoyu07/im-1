@@ -30,7 +30,7 @@ class UserRepository extends BaseRepository
             $query->with(['friends' => function ($query) {
                 $query->with(['users'])->get();
             }])->get();
-        }])->where('id', $u_id)->get();
+        }])->where('id', $u_id)->first();
 
     }
 }

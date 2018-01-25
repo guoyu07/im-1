@@ -15,9 +15,4 @@ class FriendController extends Controller
         $this->friend = $friendRepository;
     }
 
-    public function lists()
-    {
-        $data = $this->friend->friends(userId());
-        dd($data->toArray());
-    }
 }

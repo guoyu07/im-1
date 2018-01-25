@@ -7,7 +7,12 @@
 
     <link rel="stylesheet" href="{{asset('static/layui/css/layui.css')}}">
     <style>
-        html{background-color: #333;}
+        body{
+            width: 100%;
+            height:auto;
+            background:url("im/images/oneMan.jpg") no-repeat;
+            background-size: 100%;
+        }
     </style>
 </head>
 <body>
@@ -15,10 +20,6 @@
 
 <script src="{{asset('static/layui/layui.js')}}"></script>
 <script>
-
-    if(!/^http(s*):\/\//.test(location.href)){
-        alert('请部署到localhost上查看该演示');
-    }
 
     layui.use('layim', function(layim){
 
@@ -34,13 +35,13 @@
             'face[黑线]  你慢慢说，别急……',
             '(*^__^*) face[嘻嘻] ，是贤心吗？'
         ];
-
         //基础配置
         layim.config({
 
             //初始化接口
             init: {
-                url: 'static/layui/json/getList.json'
+                url: "{{url('init')}}"
+                ,type: 'get'
                 ,data: {}
             }
 
@@ -87,7 +88,7 @@
 
             //,brief: true //是否简约模式（若开启则不显示主面板）
 
-            //,title: 'WebIM' //自定义主面板最小化时的标题
+            ,title: 'WebIM' //自定义主面板最小化时的标题
             //,right: '100px' //主面板相对浏览器右侧距离
             //,minRight: '90px' //聊天面板最小化时相对浏览器右侧距离
             ,initSkin: '5.jpg' //1-5 设置初始背景
@@ -149,7 +150,7 @@
             layim.msgbox(5); //模拟消息盒子有新消息，实际使用时，一般是动态获得
 
             //添加好友（如果检测到该socket）
-            layim.addList({
+            /*layim.addList({
                 type: 'group'
                 ,avatar: "http://tva3.sinaimg.cn/crop.64.106.361.361.50/7181dbb3jw8evfbtem8edj20ci0dpq3a.jpg"
                 ,groupname: 'Angular开发'
@@ -163,7 +164,7 @@
                 ,groupid: 2
                 ,id: "1233333312121212"
                 ,remark: "本人冲田杏梨将结束AV女优的工作"
-            });
+            });*/
 
             setTimeout(function(){
                 //接受消息（如果检测到该socket）
