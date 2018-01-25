@@ -6,13 +6,13 @@
  * Time: 上午9:30
  */
 
-if(!function_exists('userId'))
-{
+if (!function_exists('userId')) {
     /**
      * 获取登录用户id
      * @return string
      */
-    function userId(){
+    function userId()
+    {
         return session('user')->id;
     }
 
