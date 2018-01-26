@@ -16,8 +16,8 @@ class IndexController extends Controller
 
     public function index()
     {
-        return view('im.index.index');
-
+        $userInfo = $this->user->find(userInfo()->id);
+        return view('im.index.index', compact('userInfo'));
     }
 
 

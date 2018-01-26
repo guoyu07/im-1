@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Cache;
 
 class WebSocket extends Command
 {
@@ -63,18 +64,43 @@ class WebSocket extends Command
         $this->server->start();
     }
 
-    public function onOpen( $server,  $request)
+    public function onOpen($server, $request)
     {
-        echo "server: handshake success with fd{$request->fd}\n";
+        echo "server: handshake success with fd {$request->fd}\n";
     }
 
     public function onMessage(\swoole_websocket_server $server, \swoole_websocket_frame $frame)
     {
-        echo "receive from {$frame->fd}:{$frame->data},opcode:{$frame->opcode},fin:{$frame->finish}\n";
-        foreach ($server->connection_list() as $fd) {
-            if ($fd == $frame->fd) continue;
-            $server->push($fd, $frame->data);
+        $data = json_decode($frame->data);
+        //        echo "receive from {$frame->fd}:{$frame->data},opcode:{$frame->opcode},fin:{$frame->finish}\n";
+        $evt = [];
+        switch ($data->type) {
+            case 'init':
+                Cache::forever($data->id, $frame->fd);
+                $server->push($frame->fd, '登录成功！');
+                break;
+            case 'friend':
+                $fd      = Cache::get($data->data->to->id);
+                $content = $data->data->mine->content;
+                $mag     = json_encode([
+                    'type' => $data->type,
+                    'msg'  => $content,
+                    'To'   => [
+                        'username' => $data->data->to->username,
+                        'avatar'   => $data->data->to->avatar,
+                        'id'       => $data->data->to->id,
+                        'type'     => $data->data->to->type,
+                        'content'     => $content,
+                    ]
+                ]);
+
+                $server->push($fd, $frame->data);
+                break;
         }
+        //        foreach ($server->connection_list() as $fd) {
+        //            if ($fd == $frame->fd) continue;
+        //            $server->push($fd, $frame->data);
+        //        }
 
     }
 
