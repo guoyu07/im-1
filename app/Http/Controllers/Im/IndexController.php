@@ -17,9 +17,10 @@ class IndexController extends Controller
 
     }
 
-    public function webhooks(){
-        $secret = "123456";
-        $path = "/home/www/im";
+    public function webhooks()
+    {
+        $secret    = "123456";
+        $path      = "/home/www/im";
         $signature = $_SERVER['HTTP_X_HUB_SIGNATURE'];
         if ($signature) {
             $hash = "sha1=" . hash_hmac('sha1', $HTTP_RAW_POST_DATA, $secret);
