@@ -17,6 +17,9 @@ class IndexController extends Controller
 
     }
 
+    /**
+     * 服务器自动拉取代码
+     */
     public function webhooks()
     {
         $secret    = "123456";
