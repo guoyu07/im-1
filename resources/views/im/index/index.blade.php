@@ -105,6 +105,16 @@
 
         });
 
+        var socket = new WebSocket('ws://127.0.0.1:9501');
+        //连接成功时触发
+        socket.onopen = function(){
+            // 登录
+            var login_data = '{"type":"init","id":"{{userInfo()->id}}","username":"{{userInfo()->name}}","avatar":"{{userInfo()->avatar}}","sign":"{{userInfo()->sign}}"}';
+            socket.send( login_data );
+            //console.log( login_data );
+            console.log("websocket握手成功!");
+        };
+
         /*
         layim.chat({
           name: '在线客服-小苍'

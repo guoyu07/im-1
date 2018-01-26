@@ -27,7 +27,7 @@ class IndexController extends Controller
      */
     public function init()
     {
-        $friends = $this->user->friends(userId());
+        $friends = $this->user->friends(userInfo()->id);
         $data['mine']['username'] = $friends->name;
         $data['mine']['id']       = $friends->id;
         $data['mine']['status']   = 'online';
