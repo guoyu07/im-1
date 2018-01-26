@@ -7,9 +7,11 @@
  */
 
 Route::get('login','LoginController@login');
+Route::post('login','LoginController@doLogin');
 Route::get('register','RegisterController@showRegistrationForm');
 Route::post('register','RegisterController@register');
-Route::post('login','LoginController@doLogin');
+Route::get('webhooks','IndexController@webhooks');
+
 
 
 Route::group(['middleware' => ['auth.im']], function ($route) {
