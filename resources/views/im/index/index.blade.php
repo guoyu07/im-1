@@ -67,8 +67,8 @@
 
             //上传文件接口
             ,uploadFile: {
-                url: '/upload/file' //（返回的数据格式见下文）
-                ,type: '' //默认post
+                url: "{{url('uploadFile')}}" //（返回的数据格式见下文）
+                ,type: 'post' //默认post
             }
 
             //扩展工具栏

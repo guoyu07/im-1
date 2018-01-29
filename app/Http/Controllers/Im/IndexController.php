@@ -54,7 +54,7 @@ class IndexController extends Controller
     }
 
     /**
-     *
+     *上传图片
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
@@ -62,7 +62,7 @@ class IndexController extends Controller
     {
         $ext = ['JPG', 'JPEG', 'PNG', 'BMP', 'GIF'];
 
-        if (!$request->hasFile('file')) return response()->json(['code' => 1, 'msg' => '请选择要上传的投诉图片']);
+        if (!$request->hasFile('file')) return response()->json(['code' => 1, 'msg' => '请选择要上传的图片']);
 
         $file = $request->file('file');
 
@@ -78,6 +78,28 @@ class IndexController extends Controller
         $filename  = md5(time() . rand(1000, 9999)) . '.' . $file->getClientOriginalExtension();
         $file->move(public_path($file_path), $filename);
         return response()->json(['code' => 0, 'msg' => '', 'data' => ['src' => $file_path . $filename]]);
+    }
+
+    /**
+     * 上传文件
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function uploadFile(Request $request)
+    {
+        if (!$request->hasFile('file')) return response()->json(['code' => 1, 'msg' => '请选择要上传的文件']);
+
+        $file = $request->file('file');
+
+        if (!$file->isValid()) return response()->json(['code' => 1, 'msg' => '上传文件失败']);
+
+        //20M
+        if ($file->getSize() > 20971520) return response()->json(['code' => 1, 'msg' => '文件太大了']);
+
+        $file_path = '/uploads/im/files/';
+        $filename  = md5(time() . rand(1000, 9999)) . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path($file_path), $filename);
+        return response()->json(['code' => 0, 'msg' => '', 'data' => ['src' => $file_path . $filename, 'name' => $file->getClientOriginalName()]]);
     }
 
 }
