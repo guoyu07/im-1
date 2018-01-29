@@ -19,4 +19,5 @@ Route::group(['middleware' => ['auth.im']], function ($route) {
     $route->get('init','IndexController@init');
     $route->get('find','IndexController@find');
     $route->get('msgBox','MessageBoxController@index');
+    $route->post('uploadImage','IndexController@uploadImage');
 });

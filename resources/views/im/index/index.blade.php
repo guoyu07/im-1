@@ -61,8 +61,8 @@
 
             //上传图片接口
             ,uploadImage: {
-                url: '/upload/image' //（返回的数据格式见下文）
-                ,type: '' //默认post
+                url: "{{url('uploadImage')}}" //（返回的数据格式见下文）
+                ,type: 'post' //默认post
             }
 
             //上传文件接口

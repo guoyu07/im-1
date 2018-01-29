@@ -45,22 +45,30 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
+            'root'   => storage_path('app'),
         ],
 
         'public' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'driver'     => 'local',
+            'root'       => storage_path('app/public'),
+            'url'        => env('APP_URL') . '/storage',
             'visibility' => 'public',
         ],
 
-        's3' => [
+        's3'    => [
             'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
+            'key'    => env('AWS_ACCESS_KEY_ID'),
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
+        ],
+
+        'qiniu' => [
+            'driver'     => 'qiniu',
+            'domain'     => 'p3b3coi27.bkt.clouddn.com',  //你的七牛域名
+            'access_key' => 'VOWyRnb100lNLzUD64R63Vh49q_J2n6rvMu7Kaxl',    //AccessKey
+            'secret_key' => '2mTdiLkN8Zwhz8WqKjWu-4_F8Y0MheBfc52J_R1u',   //SecretKey
+            'bucket'     => 'mcoo',    //Bucket名字
         ],
 
     ],

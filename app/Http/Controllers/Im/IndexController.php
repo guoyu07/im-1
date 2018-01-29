@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Im;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepository;
+use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
@@ -51,4 +52,32 @@ class IndexController extends Controller
     {
         return view('im.index.find');
     }
+
+    /**
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function uploadImage(Request $request)
+    {
+        $ext = ['JPG', 'JPEG', 'PNG', 'BMP', 'GIF'];
+
+        if (!$request->hasFile('file')) return response()->json(['code' => 1, 'msg' => '请选择要上传的投诉图片']);
+
+        $file = $request->file('file');
+
+        if (!$file->isValid()) return response()->json(['code' => 1, 'msg' => '上传图片失败']);
+
+        if ($file->getSize() > 5242880) return response()->json(['code' => 1, 'msg' => '图片太大了']);
+
+        if (!in_array(strtoupper($file->getClientOriginalExtension()), $ext)) {
+            return response()->json(['code' => 1, 'msg' => '上传图片类型不符合']);
+        }
+
+        $file_path = '/uploads/im/images/';
+        $filename  = md5(time() . rand(1000, 9999)) . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path($file_path), $filename);
+        return response()->json(['code' => 0, 'msg' => '', 'data' => ['src' => $file_path . $filename]]);
+    }
+
 }
