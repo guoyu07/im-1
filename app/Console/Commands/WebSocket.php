@@ -73,7 +73,6 @@ class WebSocket extends Command
     {
         $data = json_decode($frame->data);
         //        echo "receive from {$frame->fd}:{$frame->data},opcode:{$frame->opcode},fin:{$frame->finish}\n";
-        $evt = [];
         switch ($data->type) {
             case 'init':
                 Cache::forever($data->id, $frame->fd);
@@ -85,10 +84,6 @@ class WebSocket extends Command
                 $server->push($fd, $frame->data);
                 break;
         }
-        //        foreach ($server->connection_list() as $fd) {
-        //            if ($fd == $frame->fd) continue;
-        //            $server->push($fd, $frame->data);
-        //        }
 
     }
 
