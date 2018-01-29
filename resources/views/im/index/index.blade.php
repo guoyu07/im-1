@@ -108,14 +108,23 @@
 
         //监听收到的消息
         socket.onmessage = function(res){
-//            var obj = {
-//                        username: "tom"
-//                        ,avatar: 'https://gitee.com/uploads/64/892364_cjade.png'
-//                        ,id: '3'
-//                        ,type: 'friend'
-//                        ,content: 'dsads'
-//                    }
-                layim.getMessage(res.data);
+            var data = eval('(' + res.data + ')');
+            switch(data['type']){
+                case 'init':
+                    console.log('登录成功！');
+                    break;
+                case 'friend':
+                    var Mine = data.data.mine;
+                    layim.getMessage({
+                        username: Mine.username
+                        ,avatar: Mine.avatar
+                        ,id: Mine.id
+                        ,type: "friend"
+                        ,content: Mine.content
+                    });
+                    break;
+            }
+
 //            var data = res.data;
 //            console.log(res.data);
 //            alert(data['type']);
@@ -189,13 +198,13 @@
 
             setTimeout(function(){
                 //接受消息（如果检测到该socket）
-                layim.getMessage({
-                    username: "Hi"
-                    ,avatar: "http://qzapp.qlogo.cn/qzapp/100280987/56ADC83E78CEC046F8DF2C5D0DD63CDE/100"
-                    ,id: "10000111"
-                    ,type: "friend"
-                    ,content: "临时："+ new Date().getTime()
-                });
+//                layim.getMessage({
+//                    username: "Hi"
+//                    ,avatar: "http://qzapp.qlogo.cn/qzapp/100280987/56ADC83E78CEC046F8DF2C5D0DD63CDE/100"
+//                    ,id: "10000111"
+//                    ,type: "friend"
+//                    ,content: "临时："+ new Date().getTime()
+//                });
 
                 /*layim.getMessage({
                   username: "贤心"
@@ -213,8 +222,6 @@
             var Mine = JSON.stringify(data.mine);
             var To = JSON.stringify(data.to);
             var login_data = '{"type":"friend","data":{"mine":'+Mine+', "to":'+To+'}}';
-            console.log(login_data);
-
             socket.send( login_data );
 
             if(To.type === 'friend'){

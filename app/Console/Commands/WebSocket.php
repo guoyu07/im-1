@@ -77,23 +77,11 @@ class WebSocket extends Command
         switch ($data->type) {
             case 'init':
                 Cache::forever($data->id, $frame->fd);
-                $server->push($frame->fd, '登录成功！');
+                $init = json_encode(['type' => 'init']);
+                $server->push($frame->fd, $init);
                 break;
             case 'friend':
-                $fd      = Cache::get($data->data->to->id);
-                $content = $data->data->mine->content;
-                $mag     = json_encode([
-                    'type' => $data->type,
-                    'msg'  => $content,
-                    'To'   => [
-                        'username' => $data->data->to->username,
-                        'avatar'   => $data->data->to->avatar,
-                        'id'       => $data->data->to->id,
-                        'type'     => $data->data->to->type,
-                        'content'     => $content,
-                    ]
-                ]);
-
+                $fd = Cache::get($data->data->to->id);
                 $server->push($fd, $frame->data);
                 break;
         }
