@@ -91,8 +91,8 @@
             ,notice: true //是否开启桌面消息提醒，默认false
             //,voice: false //声音提醒，默认开启，声音文件为：default.wav
 
-            ,msgbox: layui.cache.dir + 'static/layui/css/modules/layim/html/msgbox.html' //消息盒子页面地址，若不开启，剔除该项即可
-            ,find: layui.cache.dir + 'static/layui/css/modules/layim/html/find.html' //发现页面地址，若不开启，剔除该项即可
+            ,msgbox: "{{url('msgBox')}}" //消息盒子页面地址，若不开启，剔除该项即可
+            ,find: "{{url('find')}}" //发现页面地址，若不开启，剔除该项即可
             ,chatLog: layui.cache.dir + 'static/layui/css/modules/layim/html/chatLog.html' //聊天记录页面地址，若不开启，剔除该项即可
 
         });
@@ -124,16 +124,6 @@
                     });
                     break;
             }
-
-//            var data = res.data;
-//            console.log(res.data);
-//            alert(data['type']);
-//            switch(data['type']){
-//                case 'friend':
-//                    console.log(data['To']);
-//                    layim.getMessage(data['To']);
-//                    break;
-//            }
         }
         /*
         layim.chat({

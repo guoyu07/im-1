@@ -17,4 +17,6 @@ Route::POST('webhooks','IndexController@webhooks');
 Route::group(['middleware' => ['auth.im']], function ($route) {
     $route->get('/','IndexController@index');
     $route->get('init','IndexController@init');
+    $route->get('find','IndexController@find');
+    $route->get('msgBox','MessageBoxController@index');
 });

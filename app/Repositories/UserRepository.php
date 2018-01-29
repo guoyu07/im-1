@@ -14,10 +14,6 @@ use App\Models\User;
 
 class UserRepository extends BaseRepository
 {
-    public function login()
-    {
-        return $this->find(1);
-    }
 
     /**
      * 查询用户的好友分组

@@ -17,9 +17,9 @@ class UserController extends Controller
 
     public function index()
     {
-        $user = $this->user->login();
-        dd($user);
     }
+
+
 
 
 

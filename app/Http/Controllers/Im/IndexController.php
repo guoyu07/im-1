@@ -27,7 +27,7 @@ class IndexController extends Controller
      */
     public function init()
     {
-        $friends = $this->user->friends(userInfo()->id);
+        $friends                  = $this->user->friends(userInfo()->id);
         $data['mine']['username'] = $friends->name;
         $data['mine']['id']       = $friends->id;
         $data['mine']['status']   = 'online';
@@ -44,5 +44,11 @@ class IndexController extends Controller
             }
         }
         return response()->json(['code' => 0, 'msg' => '', 'data' => $data]);
+    }
+
+
+    public function find()
+    {
+        return view('im.index.find');
     }
 }
