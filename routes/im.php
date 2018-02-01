@@ -10,7 +10,6 @@ Route::get('login','LoginController@login');
 Route::post('login','LoginController@doLogin');
 Route::get('register','RegisterController@showRegistrationForm');
 Route::post('register','RegisterController@register');
-Route::POST('webhooks','IndexController@webhooks');
 
 
 

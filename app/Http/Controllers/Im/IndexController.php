@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Im;
 
 use App\Http\Controllers\Controller;
+use App\Models\Day;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IndexController extends Controller
 {
@@ -101,5 +103,6 @@ class IndexController extends Controller
         $file->move(public_path($file_path), $filename);
         return response()->json(['code' => 0, 'msg' => '', 'data' => ['src' => $file_path . $filename, 'name' => $file->getClientOriginalName()]]);
     }
+
 
 }
