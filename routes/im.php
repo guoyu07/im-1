@@ -11,7 +11,8 @@ Route::post('login','LoginController@doLogin');
 Route::get('register','RegisterController@showRegistrationForm');
 Route::post('register','RegisterController@register');
 
-
+Route::get('qq','IndexController@qq');
+Route::get('weibo','IndexController@weibo');
 
 Route::group(['middleware' => ['auth.im']], function ($route) {
     $route->get('/','IndexController@index');
